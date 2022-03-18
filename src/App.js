@@ -6,7 +6,7 @@ import Logo from "./assets/logo.png";
 function App() {
 
     const [result, setResult] = useState([]);
-    const [ws, setWs] = useState(new WebSocket('ws://45.155.171.153:6699'));
+    const [ws, setWs] = useState(new WebSocket('wss://45.155.171.153:6699'));
 
     const getResult = () => {
         fetch(`https://warzone-factory.com/api/tournament/112`)
