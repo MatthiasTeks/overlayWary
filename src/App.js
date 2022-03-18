@@ -9,7 +9,7 @@ function App() {
     const [ws, setWs] = useState(new WebSocket('ws://45.155.171.153:6699'));
 
     const getResult = () => {
-        fetch(`https//warzone-factory.com/api/tournament/112`)
+        fetch(`https://warzone-factory.com/api/tournament/112`)
             .then((resp) => resp.json())
             .then((data) => setResult(data.leaderboard))
     }
