@@ -46,7 +46,7 @@ function App() {
         return () => {
             ws.onclose = () => {
                 console.log('WebSocket Disconnected');
-                setWs(new WebSocket('ws://45.155.171.153:6699'));
+                setWs(new WebSocket('wss://45.155.171.153:6699'));
             }
         }
     }, [ws.onmessage, ws.onopen, ws.onclose, ws]);
