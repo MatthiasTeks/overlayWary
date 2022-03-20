@@ -18,7 +18,7 @@ function App() {
             getResult();
         }, 3000);
         return () => clearTimeout(timer);
-    }, [])
+    })
 
   return (
     <div className="App">
