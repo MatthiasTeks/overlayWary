@@ -6,7 +6,6 @@ import Logo from "./assets/logo.png";
 function App() {
 
     const [result, setResult] = useState([]);
-    const [ws, setWs] = useState(new WebSocket('wss://45.155.171.153:6699'));
 
     const getResult = () => {
         fetch(`https://warzone-factory.com/api/tournament/112`)
@@ -14,46 +13,11 @@ function App() {
             .then((data) => setResult(data.leaderboard))
     }
 
-    const getChange = (newData) => {
-        console.log('redata')
-        let myDiv = document.getElementById(`team${newData.team}`);
-                myDiv.animate([
-                    {
-                        opacity: '0',
-                    },
-                    {
-                        opacity: '1',
-                    }
-                ], {
-                    duration: 1000,
-                })
-        }
-        getResult();
-
     useEffect(() => {
-        ws.onopen = () => {
-            console.log('WebSocket Connected')
-        }
-
-        ws.onmessage = (e) => {
-            console.log(e.data)
-            const wsdata = JSON.parse(e.data)
-            if(wsdata.commandName === 'tSetPoint'){
-                getChange(wsdata)
-            } else return null
-        }
-
-        return () => {
-            ws.onclose = () => {
-                console.log('WebSocket Disconnected');
-                setWs(new WebSocket('wss://45.155.171.153:6699'));
-            }
-        }
-    }, [ws.onmessage, ws.onopen, ws.onclose, ws]);
-
-    useEffect(() => {
-        console.log('refreshing')
-        getResult();
+        const timer = setTimeout(() => {
+            getResult();
+        }, 3000);
+        return () => clearTimeout(timer);
     }, [])
 
   return (
